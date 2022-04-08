@@ -1,8 +1,11 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc'
+import useFirebase from '../../Hooks/useFirebase';
 
 const Login = () => {
+    const { singInByGoogle } = useFirebase();
     return (
         <div>
             <h2 className='text-light text-center my-5'>Login </h2>
@@ -22,8 +25,12 @@ const Login = () => {
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
-                <input className='btn btn-outline-info' type="button" value="Register Now" />
-                <Link className='ms-4  text-light' to=''> Forget Password</Link>
+                <input className='btn btn-outline-info' type="button" value="Login" />
+                <Link className='ms-4  text-light' to=''> Forget Password</Link> <br /> <br />
+                <div className='text-center'>
+                    <p onClick={singInByGoogle} className='btn border text-light '> <FcGoogle className='me-2 fw-bold'></FcGoogle> <span>Sign in by useing Google</span></p>
+                </div>
+
             </Form>
         </div>
     );

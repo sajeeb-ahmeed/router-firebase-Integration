@@ -1,8 +1,12 @@
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import useFirebase from '../../Hooks/useFirebase';
 import './Header.css'
 const Header = () => {
+
+    const { user, handleSignOut } = useFirebase();
+    // console.log(user);
     return (
         <div className=''>
 
@@ -18,11 +22,19 @@ const Header = () => {
                         </Nav>
                         <Nav className='navlinks'>
                             <Link to="/"> Home </Link>
-                            <Link to="/products"> Products </Link>
-                            <Link to="/orders"> Orders </Link>
-                            <Link to="/reviews"> Reviews </Link>
+                            <Link to="/"> Products </Link>
+                            <Link to="/"> Orders </Link>
+                            <Link to=""> Reviews </Link>
                             <Link to="/register"> Register</Link>
-                            <Link to="/Login"> Login</Link>
+
+
+                            {
+                                user?.uid ?
+                                    <Link onClick={handleSignOut} to="/Login"> Logout </Link> :
+                                    <Link to="/Login"> Login</Link>
+
+                            }
+                            <span className='ms-2'>{user?.displayName && user.displayName}</span>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
