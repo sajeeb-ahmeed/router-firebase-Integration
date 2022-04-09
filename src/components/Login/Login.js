@@ -2,10 +2,15 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc'
-import useFirebase from '../../Hooks/useFirebase';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
+import { getAuth } from 'firebase/auth';
+import app from '../../Firebase/Firebase.init';
 
+const auth = getAuth(app)
 const Login = () => {
-    const { singInByGoogle } = useFirebase();
+    // const { singInByGoogle } = useFirebase();
+    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+
     return (
         <div>
             <h2 className='text-light text-center my-5'>Login </h2>
@@ -28,7 +33,7 @@ const Login = () => {
                 <input className='btn btn-outline-info' type="button" value="Login" />
                 <Link className='ms-4  text-light' to=''> Forget Password</Link> <br /> <br />
                 <div className='text-center'>
-                    <p onClick={singInByGoogle} className='btn border text-light '> <FcGoogle className='me-2 fw-bold'></FcGoogle> <span>Sign in by useing Google</span></p>
+                    <p onClick={() => signInWithGoogle()} className='btn border text-light '> <FcGoogle className='me-2 fw-bold'></FcGoogle> <span>Sign in by useing Google</span></p>
                 </div>
 
             </Form>

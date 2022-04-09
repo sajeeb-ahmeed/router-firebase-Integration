@@ -4,7 +4,7 @@ const { useState, useEffect } = require("react")
 
 const googleProvider = new GoogleAuthProvider();
 
-const auth = getAuth(app);
+export const auth = getAuth(app);
 const useFirebase = () => {
     const [user, setUser] = useState({});
     // console.log(user.displayName);
